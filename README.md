@@ -1,7 +1,7 @@
 # verilator_test
 **一.在ubuntu20.04上安装verilator和gtkwave**
-  1.安装verilator
-  ```
+  1.安装`verilator`
+  
         源代码下载：
         `git clone git@github.com:verilator/verilator.git`
         下载依赖：
@@ -14,9 +14,9 @@
         `make`
         `make test`
         `sudo make install`
-  ```
-  2.安装gtkwave
-  ```
+  
+  2.安装`gtkwave`
+
         源代码下载地址
         `http://gtkwave.sourceforge.net/`
         解压
@@ -26,10 +26,10 @@
         `./configure`
         `make`
         `sudo make install`
-  ```
-二.使用verilator仿真一个example并显示出waveform
-  ```
+  
+二.使用`verilator`仿真一个`example`并显示出`waveform`
+  
         运行：
         `cd test_verilator`
         `./buildme`
-  ```
+  
