@@ -7,9 +7,10 @@
         下载依赖：   
         sudo apt-get install perl python3 make autoconf g++ flex bison ccache libgoogle-perftools-dev numactl perl-doc libfl2 libfl-dev zlibc zlib1g zlib1g-dev       
         设置环境变量：      
-        export VERILATOR_ROOT /path to install
+        export VERILATOR_ROOT=/path_to_install
         export PATH=$VERILATOR_ROOT:$PATH        
         运行：
+        autoconf
         ./configure
         make
         make test
