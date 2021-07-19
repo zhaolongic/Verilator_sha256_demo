@@ -11,27 +11,43 @@
 module top
   (
    // Declare some signals so we can see how I/O works
-   input              clk,
-   input              reset_l,
+    input              clk,
+    input              rst_n,
 
-   output wire [1:0]  out_small,
-   output wire [39:0] out_quad,
-   output wire [69:0] out_wide,
-   input [1:0]        in_small,
-   input [39:0]       in_quad,
-   input [69:0]       in_wide
+    input       [11:0] PADDR_i,
+    input       [31:0] PWDATA_i,
+    input              PWRITE_i,
+    input              PSEL_i,
+    input              PENABLE_i,
+    output      [31:0] PRDATA_o,
+    output             PREADY_o,
+    output             PSLVERR_o,
+
+    input        [7:0] upio_in_i,
+    output       [7:0] upio_out_o,
+    output       [7:0] upio_dir_o,
+
+    output             int_o
    );
 
-   // Connect up the outputs, using some trivial logic
-   assign out_small = ~reset_l ? '0 : (in_small + 2'b1);
-   assign out_quad  = ~reset_l ? '0 : (in_quad + 40'b1);
-   assign out_wide  = ~reset_l ? '0 : (in_wide + 70'b1);
-
    // And an example sub module. The submodule will print stuff.
-   sub sub (/*AUTOINST*/
-            // Inputs
-            .clk                        (clk),
-            .reset_l                    (reset_l));
+    sha2apb  sha_top(
+        .HCLK      (clk),
+        .HRESETn   (rst_n),
+        .PADDR     (PADDR_i),
+        .PWDATA    (PWDATA_i),
+        .PWRITE    (PWRITE_i),
+        .PSEL      (PSEL_i),
+        .PENABLE   (PENABLE_i),
+        .PRDATA    (PRDATA_o),
+        .PREADY    (PREADY_o),
+        .PSLVERR   (PSLVERR_o),
+    
+        .upio_in_i  (upio_in_i),
+        .upio_out_o (upio_out_o),
+        .upio_dir_o (upio_dir_o),
+    
+        .int_o     (int_o));
 
    // Print some stuff as an example
    initial begin

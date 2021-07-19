@@ -53,16 +53,15 @@ int main(int argc, char** argv, char** env) {
     // Construct the Verilated model, from Vtop.h generated from Verilating "top.v".
     // Using unique_ptr is similar to "Vtop* top = new Vtop" then deleting at end.
     // "TOP" will be the hierarchical name of the module.
-    const std::unique_ptr<Vtop> top{new Vtop{contextp.get(), "TOP"}};
+    const std::unique_ptr<Vsha2apb> sha2apb{new Vsha2apb{contextp.get(), "sha2apb"}};
 
     // Set Vtop's input signals
     top->reset_l = !0;
     top->clk = 0;
-    top->in_small = 1;
-    top->in_quad = 0x1234;
-    top->in_wide[0] = 0x11111111;
-    top->in_wide[1] = 0x22222222;
-    top->in_wide[2] = 0x3;
+
+    top->PSEL_i = 1;
+    top->PENABLE_i = 1;
+    top->PWRITE_i = 1;
 
     // Simulate until $finish
     while (!contextp->gotFinish()) {
@@ -100,7 +99,7 @@ int main(int argc, char** argv, char** env) {
         // (If you have multiple models being simulated in the same
         // timestep then instead of eval(), call eval_step() on each, then
         // eval_end_step() on each. See the manual.)
-        top->eval();
+        sha2apb->eval();
 
         // Read outputs
         VL_PRINTF("[%" VL_PRI64 "d] clk=%x rstl=%x iquad=%" VL_PRI64 "x"
@@ -110,7 +109,7 @@ int main(int argc, char** argv, char** env) {
     }
 
     // Final model cleanup
-    top->final();
+    sha2apb->final();
 
     // Coverage analysis (calling write only after the test is known to pass)
 #if VM_COVERAGE
