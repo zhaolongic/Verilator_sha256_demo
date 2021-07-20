@@ -31,7 +31,7 @@ module top
    );
 
    // And an example sub module. The submodule will print stuff.
-    sha2apb  sha_top(
+    sha2apb  sha(
         .HCLK      (clk),
         .HRESETn   (rst_n),
         .PADDR     (PADDR_i),
@@ -49,6 +49,8 @@ module top
     
         .int_o     (int_o));
 
+        reg [7:0] counters = 0;
+
    // Print some stuff as an example
    initial begin
       if ($test$plusargs("trace") != 0) begin
@@ -56,7 +58,23 @@ module top
          $dumpfile("logs/vlt_dump.vcd");
          $dumpvars();
       end
-      $display("[%0t] Model running...\n", $time);
+            $display("[%0t] Model running...\n", $time);
    end
+
+
+   always@( posedge clk )begin 
+           counters <= counters+1;
+           //$display("[%0t] counter is %0t...\n", $time,counters);
+
+	   //if(counters ==8'd80 )begin
+            // This write is a magic value the Makefile uses to make sure the
+            // test completes successfully.
+            //$write("*-* All Finished *-*\n");
+            //$finish;
+	    //
+    //end
+   end
+
+
 
 endmodule
