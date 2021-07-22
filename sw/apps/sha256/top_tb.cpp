@@ -5,11 +5,11 @@
 // SPDX-License-Identifier: CC0-1.0
 //======================================================================
 //include files are in ~/verilators_test/includes/
-#include "/home/zhaolong/verilator_test/includes/sha_addr.h"
-#include "/home/zhaolong/verilator_test/includes/sha_func.cpp"
+#include "includes/addr.h"
+#include "includes/func.h"
 #include <memory>
 #include <verilated.h>
-#include "Vtop.h"
+#include "../../build/obj_dir/Vtop.h"
 //======================================================================
 double sc_time_stamp() { return 0; }
 

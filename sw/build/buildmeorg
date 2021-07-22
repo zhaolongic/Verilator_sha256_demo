@@ -1,4 +1,4 @@
-verilator -Wall --trace --cc --exe --build +librescan +libext+.v+.sv+.vh+.svh -y . top_tb.cpp top.v
+verilator -Wall --trace --cc --exe --build +librescan +libext+.v+.sv+.vh+.svh -y . top_tb.cpp top_tb1.cpp sha_func.cpp top.v
 verilator -Wno-fatal top.v -xml-only --bbox-sys && xml2stems obj_dir/Vtop.xml top.stems
 ./obj_dir/Vtop +trace
 touch top.sav
