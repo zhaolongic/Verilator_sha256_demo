@@ -30,7 +30,6 @@ module top
     output             int_o
    );
 
-   // And an example sub module. The submodule will print stuff.
     sha2apb  sha(
         .HCLK      (clk),
         .HRESETn   (rst_n),
@@ -54,14 +53,14 @@ module top
    // Print some stuff as an example
    initial begin
       if ($test$plusargs("trace") != 0) begin
-         $display("[%0t] Tracing to logs/vlt_dump.vcd...\n", $time);
-         $dumpfile("logs/vlt_dump.vcd");
+         $display("[%0t] Tracing to verilator_test/sw/build/wave_logs/vlt_dump.vcd...\n", $time);
+         $dumpfile("../../sw/build/wave_logs/vlt_dump.vcd");
          $dumpvars();
       end
             $display("[%0t] Model running...\n", $time);
    end
 
-
+   //this module makesure program stop
    always@( posedge clk )begin 
            counters <= counters+1;
            //$display("[%0t] counter is %0t...\n", $time,counters);
