@@ -1,4 +1,4 @@
-// DESCRIPTION: Verilator: Verilog example module
+/ DESCRIPTION: Verilator: Verilog example module
 //
 // This file ONLY is placed under the Creative Commons Public Domain, for
 // any use, without warranty, 2003 by Wilson Snyder.
@@ -53,8 +53,8 @@ module top
    // Print some stuff as an example
    initial begin
       if ($test$plusargs("trace") != 0) begin
-         $display("[%0t] Tracing to verilator_test/sw/build/wave_logs/vlt_dump.vcd...\n", $time);
-         $dumpfile("../../sw/build/wave_logs/vlt_dump.vcd");
+         $display("[%0t] Tracing to verilator_test/sw/build/logs/vlt_dump.vcd...\n", $time);
+         $dumpfile("../../sw/build/logs/vlt_dump.vcd");
          $dumpvars();
       end
             $display("[%0t] Model running...\n", $time);
