@@ -1,28 +1,34 @@
 RTL_DIR = ../sha256/rtl
-SW_DIR = ../sha256/cpp
+STIM_DIR = ../sha256/cpp
 RTL_V = $(wildcard $(RTL_DIR)/*.v)
 RTL_SV = $(wildcard $(RTL_DIR)/*.sv)
-SW_CPP = $(wildcard $(SW_DIR)/*.cpp)
+STIM_CPP = $(wildcard $(STIM_DIR)/*.cpp)
+VTOP = obj_dir/Vtop
 
-#LOGS_COMPILE = $(wildcard obj_dir/*.o)
-#LOGS_WAVE = $(wildcard logs/*.vcd)
 
-.PHONY:all
-all:sim
+.PHONY: all
+all: sim
 	@echo "[Make]: Makefile running..."
 
-.PHONY:compile
-compile:$(RTL_SV) $(RTL_V) $(SW_CPP)
-	@echo "[Make]: compiling rtl & cpp..."
-	verilator -Wall --trace --cc --exe --build +librescan +libext+.v+.sv+.vh+.svh -y ../sha256/rtl ../sha256/rtl/top.v ../sha256/cpp/top_tb.cpp ../sha256/cpp/func.cpp
+.PHONY: compile
+compile: $(VTOP)
 
-.PHONY:sim
-sim:compile 
-	@echo "[Make]: creating wave logs..."
+$(VTOP): $(RTL_V) $(RTL_SV) $(STIM_CPP)
+	@echo "[Make]: compiling rtl & cpp..."
+	verilator -Wall --trace --cc --exe --build +librescan +libext+.v+.sv+.vh+.svh -y $(RTL_DIR) $^
+
+
+.PHONY: sim
+sim: compile 
+	@echo "[Make]: running simulation..."
 	obj_dir/Vtop +trace
 
-#.PHONY: clean
-#clean: 
-#	@echo "[Make]: cleanning compile_logs"
-#	-rm all 
+.PHONY: wave
+wave:
+	gtkwave -o logs/vlt_dump.vcd &
+
+.PHONY: clean
+clean: 
+	@echo "[Make]: cleanning compile_logs"
+	-rm -r obj_dir/
 
