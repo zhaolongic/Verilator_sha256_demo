@@ -54,7 +54,7 @@ module top
    initial begin
       if ($test$plusargs("trace") != 0) begin
          $display("[%0t] Tracing to verilator_test/build/logs/vlt_dump.vcd...\n", $time);
-         $dumpfile("../../build/logs/vlt_dump.vcd");
+         $dumpfile("logs/vlt_dump.vcd");
          $dumpvars();
       end
             $display("[%0t] Model running...\n", $time);
