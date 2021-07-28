@@ -66,7 +66,7 @@ int main(int argc, char** argv, char** env) {
 	                state = 2;
 		        VL_PRINTF("[%" VL_PRI64 "d] message has been writen! message = %x \n",contextp->time(),top->PWDATA_i);
 		    }
-		    else WRITE_LOGIC(top, SHA256_REG_MESSAGE, 0x313130); 
+		    else WRITE_LOGIC(top, SHA256_REG_MESSAGE, 0x303030); 
 	            break;
 	        }
 
