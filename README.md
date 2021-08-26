@@ -30,7 +30,13 @@
         
 二.使用`verilator`仿真一个`example`并显示出`waveform`
         
-        运行：
-        cd test_verilator
-        ./buildme
+        在`build`目录下输入如下命令分别可运行：
+        //运行编译、仿真
+        make all
+        //仅编译
+        make vcompile
+        //仅仿真
+        make sim
+        //打开gtkwave
+        make wave
         
