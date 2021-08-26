@@ -48,7 +48,7 @@ module top
     
         .int_o     (int_o));
 
-        reg [7:0] counters = 0;
+        //reg [7:0] counters = 0;
 
    // Print some stuff as an example
    initial begin
@@ -61,8 +61,8 @@ module top
    end
 
    //this module makesure program stop
-   always@( posedge clk )begin 
-           counters <= counters+1;
+   //always@( posedge clk )begin 
+           //counters <= counters+1;
            //$display("[%0t] counter is %0t...\n", $time,counters);
 
 	   //if(counters ==8'd80 )begin
@@ -72,7 +72,7 @@ module top
             //$finish;
 	    //
     //end
-   end
+   //end
 
 
 

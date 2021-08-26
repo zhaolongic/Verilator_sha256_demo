@@ -14,20 +14,25 @@
 double sc_time_stamp() { return 0; }
 
 int main(int argc, char** argv, char** env) {
-    //software logic's variable
-    int state = 0; //this is for apb logic,can delete if need
-    int break_point = 0; //Simulate stop when break_point == 1
+    ///////////   No need to modify below   ///////////////
+    if (false && argc && argv && env) {}               ////
+    Verilated::mkdir("logs");                          ////
+    VerilatedContext* contextp = new VerilatedContext; ////
+    CONTEXTP_INIT(contextp, argc, argv);               ////
+    Vtop* top = new Vtop{contextp, "top"};             ////
+    ///////////////////////////////////////////////////////
 
-    const int clk_cycle = 10; //real clk cycle is 2*clk_cycle
+
+    //this is for apb logic,can delete if need
+    int state = 0;
+
+    //Simulate stop when break_point == 1
+    int break_point = 0;
+
+    //real clk cycle is 2*clk_cycle
+    const int clk_cycle = 10;
     int clk_count = 0;
 
-    //Not need to modify below
-    if (false && argc && argv && env) {}
-    Verilated::mkdir("logs");
-    VerilatedContext* contextp = new VerilatedContext;
-    CONTEXTP_INIT(contextp, argc, argv);
-    Vtop* top = new Vtop{contextp, "top"};
-    
     // Set Vtop's input signals
     top->rst_n = 1;
     top->clk = 0;
@@ -36,7 +41,6 @@ int main(int argc, char** argv, char** env) {
     while (!break_point) {
         //clk logic
         contextp->timeInc(1);
-
         if(clk_count<clk_cycle-1)
             clk_count++;
         else{
