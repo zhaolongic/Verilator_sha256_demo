@@ -77,7 +77,8 @@ int main(int argc, char** argv, char** env) {
 		    }
 		    else{
 		        IDLE_LOGIC(top);
-		        VL_PRINTF("[%" VL_PRI64 "d] wait hash progress to finish!\n",contextp->time());	       
+		        
+		        //VL_PRINTF("[%" VL_PRI64 "d] wait hash progress to finish!\n",contextp->time());	       
                     }
 	            break;
                 }

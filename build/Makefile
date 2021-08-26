@@ -1,8 +1,11 @@
 RTL_DIR = ../sha256/rtl
-STIM_DIR = ../sha256/cpp
 RTL_V = $(wildcard $(RTL_DIR)/*.v)
 RTL_SV = $(wildcard $(RTL_DIR)/*.sv)
+TOP_V = $(RTL_DIR)/top.v
+
+STIM_DIR = ../sha256/cpp
 STIM_CPP = $(wildcard $(STIM_DIR)/*.cpp)
+
 VTOP = obj_dir/Vtop
 
 
@@ -13,9 +16,9 @@ all: sim
 .PHONY: compile
 compile: $(VTOP)
 
-$(VTOP): $(RTL_V) $(RTL_SV) $(STIM_CPP)
+$(VTOP):$(RTL_V) $(RTL_SV) $(STIM_CPP)
 	@echo "[Make]: compiling rtl & cpp..."
-	verilator -Wall --trace --cc --exe --build +librescan +libext+.v+.sv+.vh+.svh -y $(RTL_DIR) $^
+	verilator -Wall --trace --cc --exe --build +librescan +libext+.v+.sv+.vh+.svh -y $(RTL_DIR) $(TOP_V) $(STIM_CPP)
 
 
 .PHONY: sim
