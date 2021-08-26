@@ -1,9 +1,9 @@
-RTL_DIR = ../sha256/rtl
+RTL_DIR = ../project/rtl
 RTL_V = $(wildcard $(RTL_DIR)/*.v)
 RTL_SV = $(wildcard $(RTL_DIR)/*.sv)
 TOP_V = $(RTL_DIR)/top.v
 
-STIM_DIR = ../sha256/cpp
+STIM_DIR = ../project/cpp
 STIM_CPP = $(wildcard $(STIM_DIR)/*.cpp)
 
 VTOP = obj_dir/Vtop
